@@ -22,7 +22,7 @@
 Flask==3.0.0
 Flask-Cors==4.0.0
 # frozenlist==1.4.0
-# gunicorn==21.2.0
+gunicorn==21.2.0
 # hyperlink==21.0.0
 # idna==2.10
 # incremental==22.10.0
