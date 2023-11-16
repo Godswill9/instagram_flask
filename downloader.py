@@ -16,7 +16,7 @@ CORS(app, resources={r"/api/*": {"origins": allowed_origins}})
 def index():
     return 'Welcome to my Flask App!'
 
-@app.route('/api/downloadFile', methods=['POST'])
+@app.route('/api/downloadFile2', methods=['POST'])
 def receive_url():
     if request.method == 'POST':
         data = request.get_json()

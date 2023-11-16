@@ -14,7 +14,7 @@ CORS(app, resources={r"/api/*": {"origins": allowed_origins}})
 
 @app.route('/', methods=['GET'])
 def index():
-    return 'Welcome to my Flask App!'
+    return 'Welcome to my Flask App from python!'
 
 @app.route('/api/downloadFile', methods=['POST'])
 def receive_url():
