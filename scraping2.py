@@ -1,13 +1,13 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS 
-from my_spider import run_spider  # Importing the function from your Scrapy file
-
-
+from bs4 import BeautifulSoup
+import requests
 
 app = Flask(__name__)
+
 allowed_origins = [
-    "http://127.0.0.1:5500",  # First origin
-    "https://simple-insta-download.netlify.app"     # Yet another origin (example)
+    "http://127.0.0.1:5500",
+    "https://simple-insta-download.netlify.app"
 ]
 
 CORS(app, resources={r"/api/*": {"origins": allowed_origins}})
@@ -24,11 +24,14 @@ def receive_url():
             url = data['url']
             print(url)
             try:
-                run_spider(url)  # Run the Scrapy spider
-                # Read the scraped HTML content from the output file
-                with open('output.json', 'r') as file:
-                    scraped_data = file.read()
-                return scraped_data  # Send the scraped HTML content back to the client
+                # Fetch the HTML content from the URL
+                response = requests.get(url)
+                print(response)
+                if response.status_code == 200:
+                    parsedData = response.content  # Send the entire HTML content back as parsedData
+                    return parsedData
+                else:
+                    return jsonify({'error': 'Failed to fetch URL'})
             except Exception as e:
                 return jsonify({'error': str(e)})
         else:
